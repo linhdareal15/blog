@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
     <!--linh icon-->
-    <link rel="icon" href="img/logo.png" />
+    <link rel="icon" href="{{asset('img/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('css/styleALL.css')}}" />
     
 
     <link rel="stylesheet" href="{{asset('css/NewArrival.css')}}" />
     <link rel="stylesheet" href="{{asset('css/styleCarousel.css')}}" />
     <link rel="stylesheet" href="{{asset('css/NavbarCSS.css')}}" />
+    <link rel="stylesheet" href="css/productCart.css" />
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js"></script>
 
     <style>
@@ -46,7 +47,7 @@
         <!--menu-bar----------------------------------------->
         <div class="navigation">
             <!--logo------------>
-            <a href="index.php" class="logo"><img src="AnhWeb/img/logo.png" /></a>
+            <a href="index.php" class="logo"><img src="{{asset('img/logo.png')}}" /></a>
             <!--menu-icon------------->
             <div class="itog">
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -55,8 +56,8 @@
             </div>
             <!--menu----------------->
             <ul id="menu" class="menu">
-                <li><a style="text-decoration: none;" href="index.php">Home</a></li>
-                <li class="shop"><a style="text-decoration: none;" href="shop.php">SHOP</a></li>
+                <li><a style="text-decoration: none;" href="{{route('home')}}">Home</a></li>
+                <li class="shop"><a style="text-decoration: none;" href="{{route('shop')}}">SHOP</a></li>
                 <li>
                     <a style="text-decoration: none;" href="#">TOP</a>
                     <!--lable---->
@@ -86,44 +87,67 @@
                                 </span>');
                         }
                         ?>
-
                     </i>
                 </a>
+                    @guest
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}"style="text-decoration: none;" class="user">
+                                <i class="far fa-user"> </i> {{ __('Login') }}
+                            </a>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                    
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                    @endguest    
                 <?php
-                if (!isset($_SESSION['account']) && empty($_SESSION['account'])) {
-                    echo ('<a href="login.php"style="text-decoration: none;" class="user">
-                                <i class="far fa-user"></i> LOGIN
-                          </a>');
-                } else {
+                // if (!isset($_SESSION['account']) && empty($_SESSION['account'])) {
+                //     echo ('<a href="login.php"style="text-decoration: none;" class="user">
+                //                 <i class="far fa-user"></i> LOGIN
+                //           </a>');
+                // } else {
                 ?>
-                    <div class="ml-0">
+                    <!-- <div class="ml-0">
                         <i class="dropdown">
                             <button class="btn btn-secondary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bars"></i>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> -->
                                 <?php
-                                if ($_SESSION['account']['role_id'] != 1) {
-                                    echo ('<li><a class="dropdown-item" href="manage">ManageProfile</a></li>');
-                                } elseif ($_SESSION['account']['role_id'] == 1) {
-                                    echo ('<li><a class="dropdown-item" href="ManagerProduct.php">Manage Product</a></li>
-                                        <li><a class="dropdown-item" href="#">Manage Account</a></li>
-                                        <li><a class="dropdown-item" href="Manage">Manage Order</a></li>');
-                                }
+                                // if ($_SESSION['account']['role_id'] != 1) {
+                                //     echo ('<li><a class="dropdown-item" href="manage">ManageProfile</a></li>');
+                                // } elseif ($_SESSION['account']['role_id'] == 1) {
+                                //     echo ('<li><a class="dropdown-item" href="ManagerProduct.php">Manage Product</a></li>
+                                //         <li><a class="dropdown-item" href="#">Manage Account</a></li>
+                                //         <li><a class="dropdown-item" href="Manage">Manage Order</a></li>');
+                                // }
+                                // ?>
+                                 <?php
+                                // if ($_SESSION['account']['role_id'] != 1) {
+                                //     echo ('<li><a class="dropdown-item" href="#">Order detail</a></li>');
+                                // }
                                 ?>
-                                <?php
-                                if ($_SESSION['account']['role_id'] != 1) {
-                                    echo ('<li><a class="dropdown-item" href="#">Order detail</a></li>');
-                                }
-                                ?>
-                                <li><a class="dropdown-item" href="logout.php">LOGOUT</a></li>
+                                <!-- <li><a class="dropdown-item" href="logout.php">LOGOUT</a></li>
                             </ul>
                         </i>
-                    </div>
+                    </div> -->
 
-                <?php
-                }
-                ?>
+                
             </div>
     </nav>
 

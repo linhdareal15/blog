@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Auth;
 */
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop');
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\ShopController::class, 'AddToCart'])->name('AddToCart');
-Route::get('/detail/{id}', [App\Http\Controllers\ShopController::class, 'Detail'])->name("Detail");
 
 Route::resource('/product', 'App\Http\Controllers\ProductController');
 

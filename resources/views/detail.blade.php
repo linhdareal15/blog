@@ -13,7 +13,11 @@
         <div class="col-md-6">
             <div id="slider" class="owl-carousel p-slider">
                 <div class="item">
-                    <img src="{{$p->image_url}}" />
+                    <?php
+                        $image= asset("img/$p->image_url");
+                        echo $image;
+                    ?>
+                    <img src="{{$image}}" />
                 </div>
                 <?php
                 // foreach ($listImage as $image) {
@@ -26,7 +30,7 @@
             </div>
             <div id="thumb" class="owl-carousel product-thumb" style="margin-top: 20px;">
                 <div class="item">
-                    <img src="{{$p->image_url}}" />
+                    <img src="{{$image}}" />
                 </div>
                 <?php
                 // foreach ($listImage as $image) {

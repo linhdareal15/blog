@@ -18,11 +18,12 @@ Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\ShopController::class, 'AddToCart'])->name('AddToCart');
 Route::get('/detail/{id}', [App\Http\Controllers\ShopController::class, 'Detail'])->name("Detail");
 
+Route::resource('/product', 'App\Http\Controllers\ProductController');
 
 Auth::routes();
 Route::get('/login', function () {
     return view('login');
 });
-Auth::routes();
+
 
 

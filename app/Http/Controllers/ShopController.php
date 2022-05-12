@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 session_start();
 use Illuminate\Support\Facades\DB;
-
 class ShopController extends Controller
 {
     
@@ -66,17 +65,8 @@ class ShopController extends Controller
             //} 
         } 
     }
-    public function Detail($id){
-        if(isset($id)){
-            $id=intval($_GET['id']); 
-            $product = DB::select("Select * from Product where id = $id");
-            $image = DB::select("Select * from `image` where product_id = $id AND status= 1");
-            if($product != null){
-                return $product;
-            }
-        }else{
-            return view("shop");
-        }
+    public function Detail(){
+        
     }
 
     public static function index(){

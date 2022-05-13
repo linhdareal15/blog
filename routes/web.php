@@ -14,14 +14,18 @@ use Illuminate\Support\Facades\Auth;
 */
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/add-to-cart/{id}', [App\Http\Controllers\ShopController::class, 'AddToCart'])->name('AddToCart');
+Route::get('/add-to-cart/{id}', 'App\Http\Controllers\ShopController@AddToCart');
 
 Route::resource('/product', 'App\Http\Controllers\ProductController');
+Route::resource('/category', 'App\Http\Controllers\CategoryController');
+Route::resource('/checkout','App\Http\Controllers\CheckoutController');
 
 Auth::routes();
 Route::get('/login', function () {
     return view('login');
 });
 
+Auth::routes();
+Route::resource('/cart', 'App\Http\Controllers\CartController');
 
 

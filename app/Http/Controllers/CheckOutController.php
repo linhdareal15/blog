@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 
-class ProductController extends Controller
+if(!isset($_SESSION)){
+    session_start();
+}
+
+class CheckOutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,22 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $p=new Product();
-        $products = $p->GetAll();
-        $c = new Category();
-        $categories = $c->GetAll();
-        
-        return view('shop')->with('products',$products)->with("categories",$categories);
+        if (isset($_SESSION['cart'])) {
+            $products = $_SESSION['cart'];
+            $tong = $_GET['tong'];
+            $_SESSION['tong'] = $tong;
+            $product = $_SESSION['cart'];
+
+            foreach ($products as $item) {
+                $amount = $_GET['amount' . $item['id']];
+                if ($amount > 0) {
+                    $product[$item['id']]['quantity'] = $amount;
+                    $_SESSION['cart'][$item['id']]['quantity'] = $amount;
+                }
+            }
+            return view('checkout')->with('products', $products)->with('tong', $tong);
+        }  //them check account
+
     }
 
     /**
@@ -52,19 +62,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-            $p = new Product();
-            $product = $p->GetOne($id);
-           // $image = DB::select("Select * from `image` where product_id = $id AND status= 1");
-            if($product != null){
-                //dd($product);
-                $product = (array)$product;
-                return View::make('detail')->with('product',$product);
-            }else{
-                return redirect()->route('product.index')->with('msg',"Khong co san pham");
-            }
-        
     }
 
     /**
@@ -100,5 +99,4 @@ class ProductController extends Controller
     {
         //
     }
-    
 }

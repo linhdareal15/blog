@@ -1,6 +1,9 @@
 @extends('layouts.qp')
 
 @section('content')
+<?php
+        session_start();
+    ?>
 <div class=" mt-1">
     <div class="lv-filters-bar-new__title">
         <div class="lv-category__title">
@@ -28,12 +31,12 @@
             ?>
             <div class="product-box">
                 <div class="product-img">
-                    <a href="addtocart.php?action=add&id={{$row->id}}" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="/add-to-cart/{{$row->id}}" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                        
                         <a href="{{route('product.show',$row->id)}}" class=""><img src="{{$img}}"></a>
                 </div>
                     <div class="product-details">
-                        <a href="detail?productId=${product.id}" class="p-name">{{$row->name}}</a>
+                        <a href="{{route('product.show',$row->id)}}" class="p-name">{{$row->name}}</a>
                          <span class="p-price">{{number_format($row->price,0,'.',',')}}₫</span>
                     </div>
             </div>

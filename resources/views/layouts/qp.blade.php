@@ -78,7 +78,7 @@
                 <a href="javascript:void(0);" class="search" style="text-decoration: none;">
                     <i class="fas fa-search"></i>
                 </a>
-                <a href="cart.php" style="text-decoration: none;margin-right: 25px">
+                <a href="{{route('cart.index')}}" style="text-decoration: none;margin-right: 25px">
                     <i class="fas fa-shopping-cart">
                         <?php
                         // session_start();
@@ -101,14 +101,22 @@
                             </a>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                    
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <div class="ml-0">
+                        <i class="dropdown">
+                            <button class="btn btn-secondary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                @if (Auth::user()->role_id == 1)
+                                    <li><a class="dropdown-item">{{ Auth::user()->name }}</a></li>
+                                    <li><a class="dropdown-item" href="manage">ManageProfile</a></li>
+                                
+                                @elseif(Auth::user()->role_id == 2)
+                                        <li><a class="dropdown-item" href="ManagerProduct.php">Manage Product</a></li>
+                                        <li><a class="dropdown-item" href="#">Manage Account</a></li>
+                                        <li><a class="dropdown-item" href="Manage">Manage Order</a></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -117,42 +125,11 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
-                            </li>
-                    @endguest    
-                <?php
-                // if (!isset($_SESSION['account']) && empty($_SESSION['account'])) {
-                //     echo ('<a href="login.php"style="text-decoration: none;" class="user">
-                //                 <i class="far fa-user"></i> LOGIN
-                //           </a>');
-                // } else {
-                ?>
-                    <!-- <div class="ml-0">
-                        <i class="dropdown">
-                            <button class="btn btn-secondary " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-bars"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> -->
-                                <?php
-                                // if ($_SESSION['account']['role_id'] != 1) {
-                                //     echo ('<li><a class="dropdown-item" href="manage">ManageProfile</a></li>');
-                                // } elseif ($_SESSION['account']['role_id'] == 1) {
-                                //     echo ('<li><a class="dropdown-item" href="ManagerProduct.php">Manage Product</a></li>
-                                //         <li><a class="dropdown-item" href="#">Manage Account</a></li>
-                                //         <li><a class="dropdown-item" href="Manage">Manage Order</a></li>');
-                                // }
-                                // ?>
-                                 <?php
-                                // if ($_SESSION['account']['role_id'] != 1) {
-                                //     echo ('<li><a class="dropdown-item" href="#">Order detail</a></li>');
-                                // }
-                                ?>
-                                <!-- <li><a class="dropdown-item" href="logout.php">LOGOUT</a></li>
+                                </li>
                             </ul>
                         </i>
-                    </div> -->
-
-                
+                    </div>
+                    @endguest    
             </div>
     </nav>
 

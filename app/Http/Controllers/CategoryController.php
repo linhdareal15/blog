@@ -3,26 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
+use App\Models\Product;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $p=new Product();
-        $products = $p->GetAll();
+        $p = new Product();
         $c = new Category();
-        $categories = $c->GetAll();
-        
-        return view('shop')->with('products',$products)->with("categories",$categories);
+        if(is_int($id)){
+            $products = $p->GetBySubCategoryId($id);
+            $categories = $c->GetAll();
+            return view('shop')->with('products',$products)->with("categories",$categories);
+        }
     }
 
     /**
@@ -54,17 +53,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-            $p = new Product();
-            $product = $p->GetOne($id);
-           // $image = DB::select("Select * from `image` where product_id = $id AND status= 1");
-            if($product != null){
-                //dd($product);
-                $product = (array)$product;
-                return View::make('detail')->with('product',$product);
-            }else{
-                return redirect()->route('product.index')->with('msg',"Khong co san pham");
-            }
-        
+        //
     }
 
     /**
@@ -100,5 +89,4 @@ class ProductController extends Controller
     {
         //
     }
-    
 }

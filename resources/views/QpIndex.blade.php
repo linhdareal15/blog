@@ -2,6 +2,9 @@
 
 @section('content')
     <!-- carouel-->
+    <?php
+        session_start();
+    ?>
     <section class="home">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-controls">
@@ -102,5 +105,38 @@
             </ul>
         </section>
     </div>
-
+    <!--NEW ARRIVAL-------------------------------->
+    <div class="product-show">
+        <section class="new-arrival">
+            <!--heading-------->
+            <div class="arrival-heading">
+                <strong>New Arrival</strong>
+                <p>We Provide You New Fasion Design Clothes</p>
+            </div>
+            <!--products----------------------->
+            <div class="product-containe">
+                @foreach ($products as $product)
+                    <?php
+                        $img = asset("img/$product->image_url");    
+                    ?>
+                    <div class="product-box">
+                            <!--product-img------------>
+                            <div class="product-img">
+                            <!--add-cart---->
+                            <a href="addtocart.php?productId='.$product['id'].'" class="add-cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                            <!--img------>
+                            <img src="{{$img}}">
+                            </div>
+                        <!--product-details-------->
+                        <div class="product-details">
+                            <a href="#" class="p-name">{{$product->name}}</a>
+                            <span class="p-price">{{number_format($product->price,0,'.',',')}}₫</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    </div>
 @endsection

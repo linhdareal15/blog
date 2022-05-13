@@ -36,6 +36,7 @@ and open the template in the editor.
 /*Categories*/
 .product-show{
     display: flex;
+    justify-content: center;
 }
 .feature-heading {
     text-align: center;
@@ -60,7 +61,7 @@ and open the template in the editor.
     align-items: center;
     border: 1px solid #f7f7f7;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: 20px;
     margin-bottom: 5px;
     margin-right: 0px;
 }

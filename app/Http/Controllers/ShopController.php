@@ -42,7 +42,7 @@ class ShopController extends Controller
                   
                 $_SESSION['cart'][$id]['quantity']+=1; 
                 //header("Location: shop.php");
-                route('home');
+                return redirect()->route('product.index');
             }else{ 
                 $query_s=DB::select("SELECT * FROM product where id = $id"); 
                 if($query_s!=0){ 
@@ -56,17 +56,13 @@ class ShopController extends Controller
                             "price" => $row->price, 
                         );
                    }
-                   return redirect()->route("shop");
-                        
+                   return redirect()->route('product.index');
                 }else{ 
                     $message="This product id it's invalid!";    
                     print_r($message);
                 }   
             //} 
         } 
-    }
-    public function Detail(){
-        
     }
 
     public static function index(){

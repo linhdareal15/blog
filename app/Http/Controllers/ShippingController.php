@@ -43,7 +43,7 @@ class ShippingController extends Controller{
             
         }
 
-        return view('QpIndex');
+        return redirect()->route('home');
     }
 
 

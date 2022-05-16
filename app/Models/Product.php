@@ -13,6 +13,7 @@ if(!isset($_SESSION)){
 
 class Product extends Model
 {
+    protected $table = "product";
     use HasFactory;
     protected $fillable = [
         "code",

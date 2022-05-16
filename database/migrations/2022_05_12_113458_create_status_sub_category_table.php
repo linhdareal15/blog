@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('status_sub_category')) {
         Schema::create('status_sub_category', function (Blueprint $table) {
             $table->id();
             $table->string('status');
         });
+        }
     }
 
     /**

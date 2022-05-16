@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('order_detail')) {
         Schema::create('order_detail', function (Blueprint $table) {
             $table->id();
             $table->integer('order_id');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('product_link')->nullable();
             $table->timestamps();
         });
+        }
     }
 
     /**

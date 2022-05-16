@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('image')) {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->integer('status');
             $table->timestamps();
         });
+        }
     }
 
     /**

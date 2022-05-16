@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('shipping')) {
         Schema::create('shipping', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->timestamps();
         });
+        }
     }
 
     /**

@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('role_account')) {
         Schema::create('role_account', function (Blueprint $table) {
             $table->id();
-            $table->string('role');
+            $table->string('role')->default("user");
         });
+        }
     }
 
     /**

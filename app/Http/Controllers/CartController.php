@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-if(!isset($_SESSION)){
+
+if (!isset($_SESSION)) {
     session_start();
 }
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +64,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) //chua check xem san pham co hay khong
-    {   
+    {
         unset($_SESSION['cart'][$id]);
         return redirect()->route('cart.index');
     }

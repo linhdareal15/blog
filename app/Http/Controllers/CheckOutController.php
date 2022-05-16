@@ -10,6 +10,10 @@ if(!isset($_SESSION)){
 
 class CheckOutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,8 +35,7 @@ class CheckOutController extends Controller
                 }
             }
             return view('checkout')->with('products', $products)->with('tong', $tong);
-        }  //them check account
-
+        }
     }
 
     /**

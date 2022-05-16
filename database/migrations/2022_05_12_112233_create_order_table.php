@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('order')) {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->string('customer_name');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->integer('status');
             $table->timestamps();
         });
+        }
     }
 
     /**

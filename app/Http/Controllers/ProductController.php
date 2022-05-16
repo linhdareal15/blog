@@ -17,8 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $p=new Product();
-        $products = $p->GetAll();
+        
+        $products = Product::GetAll();
         $c = new Category();
         $categories = $c->GetAll();
         
@@ -54,8 +54,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-            $p = new Product();
-            $product = $p->GetOne($id);
+            $product = Product::GetOne($id);
            // $image = DB::select("Select * from `image` where product_id = $id AND status= 1");
             if($product != null){
                 //dd($product);

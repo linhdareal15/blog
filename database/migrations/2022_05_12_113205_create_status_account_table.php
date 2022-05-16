@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('status_account')) {
         Schema::create('status_account', function (Blueprint $table) {
             $table->id();
             $table->string('status');
             // $table->timestamps();
         });
+        }
     }
 
     /**

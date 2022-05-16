@@ -23,8 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $FiveNewestProduct = new Product();
-        $FiveNewestProduct = $FiveNewestProduct->GetFiveNewest();
+        $FiveNewestProduct = Product::GetFiveNewest();
         return view('QpIndex')->with("products",$FiveNewestProduct);
     }
 }

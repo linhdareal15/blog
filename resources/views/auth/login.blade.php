@@ -1,6 +1,11 @@
 @extends('layouts.qp')
 
 @section('content')
+<?php
+    if(!isset($_SESSION)){
+        session_start();
+    }
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -56,12 +61,15 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
+                                
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                        {{ __('Register') }}
+                                    </a>
                             </div>
                         </div>
                     </form>

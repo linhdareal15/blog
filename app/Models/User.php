@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Carbon\Carbon;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +42,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function TotalUsersCount(){
+        $total = DB::table('users')->count();
+        return $total;
+    }
+    public static function today_users_count(){
+        $today = Carbon::now()->format('m-d-Y');
+        $total = DB::select('SELECT Count(id) as user_today_count FROM `users` WHERE created_at >='.$today);
+        foreach ($total as $t){
+            $total = $t->user_today_count;
+        }
+        if($total==null) $total = 0;
+        return $total;
+    }
 }

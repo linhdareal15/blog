@@ -2,6 +2,7 @@
 
 @section('content')
 <?php
+        if(!isset($_SESSION))
         session_start();
     ?>
 <div class=" mt-1">

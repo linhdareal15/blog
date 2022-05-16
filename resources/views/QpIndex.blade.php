@@ -3,7 +3,9 @@
 @section('content')
     <!-- carouel-->
     <?php
-        session_start();
+        if(!isset($_SESSION)){
+            session_start();
+        }
     ?>
     <section class="home">
         <div id="carousel" class="carousel slide" data-ride="carousel">

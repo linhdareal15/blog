@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('sub_category')) {
         Schema::create('sub_category', function (Blueprint $table) {
             $table->id();
             $table->integer('category_id');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->integer('status');
             $table->timestamps();
         });
+        }
     }
 
     /**

@@ -13,19 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->id();
-            $table->string('code');
-            $table->string('name');
-            $table->integer('quantity');
-            $table->double('price');
-            $table->longText('description');
-            $table->string('image_url');
-            $table->integer('sub_category_id');
-            $table->double('sale')->default(0);
-            $table->integer('status');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('product')) {
+            Schema::create('product', function (Blueprint $table) {
+                $table->id();
+                $table->string('code');
+                $table->string('name');
+                $table->integer('quantity');
+                $table->double('price');
+                $table->longText('description');
+                $table->string('image_url');
+                $table->integer('sub_category_id');
+                $table->double('sale')->default(0);
+                $table->integer('status');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

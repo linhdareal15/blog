@@ -65,7 +65,8 @@
                     <h3 class="mt-3" style="color: black">THÔNG TIN KHÁCH HÀNG</h3>
                     <div class="card mt-3">
                         <div class="card-body">
-                            <form action="prepareShipping.php" method="POST">
+                            <form action="/prepare" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <label for="name">HỌ VÀ TÊN</label>
                                     <input type="text" name="name" class="form-control" placeholder="Enter name"

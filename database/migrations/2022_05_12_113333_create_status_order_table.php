@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('status_order')) {
         Schema::create('status_order', function (Blueprint $table) {
             $table->id();
             $table->string('status');
         });
+        }
     }
 
     /**

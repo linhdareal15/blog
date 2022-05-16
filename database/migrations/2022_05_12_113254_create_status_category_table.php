@@ -12,11 +12,12 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {   if (!Schema::hasTable('status_category')) {
         Schema::create('status_category', function (Blueprint $table) {
             $table->id();
             $table->string('status');
         });
+        }
     }
 
     /**

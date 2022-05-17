@@ -78,4 +78,15 @@ class Product extends Model
             // return ['products'-> $products ];
         }
     }
+
+    public static function GetBestSale(){
+        $product = DB::select('SELECT product_id as id, COUNT(product_id) as total FROM `order_detail` GROUP BY product_id ORDER BY total DESC LIMIT 10');
+        $result = array();
+        foreach($product as $item){
+            $product = Product::GetOne($item->id);
+            array_push($result, $product);
+        }
+        return $result;
+    }
+
 }

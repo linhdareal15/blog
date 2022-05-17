@@ -20,8 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
-  <title>admin/
-    Material Dashboard 2 by Creative Tim
+  <title>Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -37,6 +36,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+  
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -126,9 +126,9 @@
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
+      <!-- <div class="mx-3">
         <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-      </div>
+      </div> -->
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -330,12 +330,12 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Website Views</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
+              <h6 class="mb-0 ">Daily Sales</h6>
+              <p class="text-sm ">Last 7 Days</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                <p class="mb-0 text-sm"> updated just now </p>
               </div>
             </div>
           </div>
@@ -387,10 +387,10 @@
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Projects</h6>
+                  <h6>TOP BEST SALE PRODUCT</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">30 done</span> this month
+                    <span class="font-weight-bold ms-1">10 showing</span> 
                   </p>
                 </div>
                 <div class="col-lg-6 col-5 my-auto text-end">
@@ -412,7 +412,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Companies</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Members</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Budget</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Completion</th>
@@ -435,15 +435,6 @@
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
                             <img src="./assets/img/team-1.jpg" alt="team1">
                           </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="./assets/img/team-2.jpg" alt="team2">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                            <img src="./assets/img/team-3.jpg" alt="team3">
-                          </a>
-                          <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="./assets/img/team-4.jpg" alt="team4">
-                          </a>
                         </div>
                       </td>
                       <td class="align-middle text-center text-sm">
@@ -462,7 +453,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
@@ -649,7 +640,7 @@
                           </div>
                         </div>
                       </td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
@@ -667,7 +658,7 @@
             </div>
             <div class="card-body p-3">
               <div class="timeline timeline-one-side">
-                <div class="timeline-block mb-3">
+                <!-- <div class="timeline-block mb-3">
                   <span class="timeline-step">
                     <i class="material-icons text-success text-gradient">notifications</i>
                   </span>
@@ -711,16 +702,18 @@
                     <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
                     <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
                   </div>
-                </div>
-                <div class="timeline-block">
+                </div> -->
+                @foreach ($seven_newest_order as $order)
+                <a href="{{$order->id}}" style="text-decoration: none;"><div class="timeline-block">
                   <span class="timeline-step">
                     <i class="material-icons text-dark text-gradient">payments</i>
                   </span>
                   <div class="timeline-content">
-                    <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">New order #{{$order->id}}</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{$order->created_at}}</p>
                   </div>
-                </div>
+                </div></a>
+                @endforeach
               </div>
             </div>
           </div>
@@ -730,16 +723,16 @@
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
+              <!-- <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by
                 <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
                 for a better web.
-              </div>
+              </div> -->
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
                   <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
@@ -754,7 +747,7 @@
                   <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </footer>
@@ -820,7 +813,7 @@
         </div>
         <hr class="horizontal dark my-sm-4">
         <a class="btn btn-outline-dark w-100" href="">View documentation</a>
-        <div class="w-100 text-center">
+        <!-- <div class="w-100 text-center">
           <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
           <h6 class="mt-3">Thank you for sharing!</h6>
           <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
@@ -829,7 +822,7 @@
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
             <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -842,10 +835,20 @@
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
+      date = [
+      <?php
+          foreach ($chart1_date as $date){
+            //$date = date('d-m-Y',$date);
+            echo '"'.$date.'", ';
+          }  
+      ?>
+    ];
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        
+        //labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: date,
         datasets: [{
           label: "Sales",
           tension: 0.4,
@@ -853,7 +856,15 @@
           borderRadius: 4,
           borderSkipped: false,
           backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
+          //data: [50, 20, 10, 22, 50, 10, 40],
+          data: [
+            <?php
+            foreach ($chart1_value as $value){
+            //$date = date('d-m-Y',$date);
+            echo '"'.$value.'", ';
+          }  
+      ?>
+          ],
           maxBarThickness: 6
         }, ],
       },
@@ -926,9 +937,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Jan","Feb","Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Product",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -939,7 +950,14 @@
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          //data: [0,0,0,50, 40, 300, 320, 500, 350, 200, 230, 500],
+          data: [
+            <?php
+              foreach ($chart2_data as $value){
+                echo '"'.$value.'", ';
+              }  
+            ?>
+          ],
           maxBarThickness: 6
 
         }],

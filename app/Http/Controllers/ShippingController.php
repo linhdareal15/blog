@@ -37,11 +37,12 @@ class ShippingController extends Controller{
         foreach ($products as $item){
             $product = Product::GetOne($item['id']);
             if($product !=null){
-                $order_detail = new OrderDetail($order_id,$product);
+                $order_detail = new OrderDetail($order_id,$product,$item['quantity']);
                 $order_detail->save();
             }
             
         }
+            unset($_SESSION['cart']);
 
         return redirect()->route('home');
     }

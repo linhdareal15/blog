@@ -19,11 +19,11 @@ class OrderDetail extends Model
         "updated_at"
     ];
 
-    public function __construct($order_id, Product $product){
+    public function __construct($order_id, Product $product,$quantity){
         $this->order_id = $order_id;
         $this->product_id = $product->id;
         $this->product_name = $product->name;
         $this->price = $product->price;
-        $this->quantity = $product->quantity;
+        $this->quantity = $quantity;
     }
 }

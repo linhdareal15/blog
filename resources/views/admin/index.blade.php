@@ -18,21 +18,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
+  <link rel="icon" type="image/png" href="{{asset('admin/assets/img/favicon.png')}}">
   <title>Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
-  <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
-  <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+  <link href="{{asset('admin/assets/css/nucleo-icons.css')}}" rel="stylesheet" />
+  <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css?v=3.0.2')}}" rel="stylesheet" />
+  <link id="pagestyle" href="{{asset('admin/assets/css/material-dashboard.css?v=3.0.2')}}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -41,7 +41,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{asset('admin/assets/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">LV shop dashboard</span>
       </a>
     </div>
@@ -419,14 +419,18 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($best_sale_product as $item)
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="./assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                            <?php
+                              $image = asset('img/'.$item->image_url);
+                            ?>
+                            <img src="{{$image}}" class="avatar avatar-sm me-3" alt="xd">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Material XD Version</h6>
+                            <h6 class="mb-0 text-sm">{{$item->name}}</h6>
                           </div>
                         </div>
                       </td>
@@ -453,6 +457,7 @@
                         </div>
                       </td>
                     </tr>
+                    @endforeach
                     <!-- <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -1116,7 +1121,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{asset('assets/js/material-dashboard.min.js?v=3.0.2')}}"></script>
+  <script src="{{asset('admin/assets/js/material-dashboard.min.js?v=3.0.2')}}"></script>
 </body>
 
 </html>

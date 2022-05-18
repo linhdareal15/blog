@@ -20,7 +20,7 @@ Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::resource('/checkout','App\Http\Controllers\CheckoutController');
 
-Route::resource('/dashboard','App\Http\Controllers\Admin\DashboardController');
+//Route::resource('/dashboard','App\Http\Controllers\Admin\DashboardController');
 
 Route::post('shipping','App\Http\Controllers\ShippingController@create_order');
 Auth::routes();

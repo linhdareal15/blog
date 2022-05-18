@@ -14,6 +14,7 @@ if(!isset($_SESSION)){
 class Product extends Model
 {
     protected $table = "product";
+    
     use HasFactory;
     protected $fillable = [
         "code",
@@ -41,7 +42,10 @@ class Product extends Model
     }
 
     public static function GetAll(){
-        $products = DB::table('product')->paginate(20);
+        $appsetting = file_get_contents('../appsettings.json');
+        $decoded_json = json_decode($appsetting, false);
+        $limit = (integer)$decoded_json->paggination;
+        $products = DB::table('product')->paginate($limit);
         return $products;
     }
     public static function GetOne($id){

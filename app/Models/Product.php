@@ -60,6 +60,18 @@ class Product extends Model
         }
         return null;
     }
+
+    public static function GetProductCategoryAndSubcategory($id){
+        if(intval($id)){
+            $result = DB::select("SELECT c.category_name as `category_name`, s.sub_category_name From product as p, category as c, sub_category as s 
+            WHERE p.sub_category_id = s.id AND s.category_id = c.id AND p.id = $id");
+            if($result !=null){
+                return $result;
+            }
+        }
+        return null;
+    }
+
     public static function GetBySubCategoryId($id){
         if(intval($id)){
             $products = DB::select("select * from `product` where sub_category_id = $id");

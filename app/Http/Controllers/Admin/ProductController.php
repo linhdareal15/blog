@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Product;
 class ProductController extends Controller
 {
     /**
@@ -12,9 +12,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct(){
+    //     $this->middleware('auth:admin');
+    // }
     public function index()
     {
-        return view('admin.product');
+        $products = Product::GetAll();
+
+        return view('admin.product')->with('products',$products);
     }
 
     /**

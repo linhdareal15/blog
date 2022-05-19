@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         //$this->call(ProductTableSeeder::class);
         //$this->call(UsersTableSeeder::class);
-        //$this->call(OrderTableSeeder::class);
-        DB::table('admins')->insert([
-            [
-                'name' => 'Admin',
-                'email' => 'admin@gmail.com',
-                'password' => bcrypt('Admin123'),
-            ]
-        ]);
+        $this->call(OrderTableSeeder::class);
+        // DB::table('admins')->insert([
+        //     [
+        //         'name' => 'Admin',
+        //         'email' => 'admin@gmail.com',
+        //         'password' => bcrypt('Admin123'),
+        //     ]
+        // ]);
 
     }
 }

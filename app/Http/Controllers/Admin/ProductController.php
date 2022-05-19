@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\SubCategory;
+
 class ProductController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class ProductController extends Controller
     // }
     public function index()
     {
-        $products = Product::GetAll();
+        $products = Product::GetAll("");
 
         return view('admin.product')->with('products',$products);
     }
@@ -40,7 +42,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'code' => ['required', 'max:10'],
+            'name' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price'=>['required','numeric','max:500000'],
+            'quantity' => ['required','numeric','max:4'],
+            'image_url' => ['required'],
+            'sub_category_id' => ['required'],
+            'sale' => ['required','numeric','max:1'],
+            'status' => ['required','numeric']
+        ]);
+
+        $data = $request->all();
+        $bool = Product::EditProduct($data['id'], $data['code'],$data['name'],$data['description'],
+                    $data['price'],$data['quantity'], $data['image_url'],$data['sub_category_id'],
+                    $data['sale'],$data['status']);
+        if($bool == true){
+            return redirect()->route('manager-product.index');
+        }
     }
 
     /**
@@ -62,7 +82,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(intval($id)){
+            $sub_category = SubCategory::GetAll();
+            $product = Product::GetOne($id);
+            return view('admin.editproduct')
+            ->with('product', $product)
+            ->with('sub_category', $sub_category);
+        }
     }
 
     /**

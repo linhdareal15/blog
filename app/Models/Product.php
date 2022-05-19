@@ -6,6 +6,7 @@ use Hamcrest\Type\IsInteger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 if(!isset($_SESSION)){
     session_start();
@@ -41,11 +42,14 @@ class Product extends Model
         $this->sale = $sale;
     }
 
-    public static function GetAll(){
+    public static function GetAll($action){
         $appsetting = file_get_contents('../appsettings.json');
         $decoded_json = json_decode($appsetting, false);
         $limit = (integer)$decoded_json->paggination;
+        if($action=="")
         $products = DB::table('product')->paginate($limit);
+        else if($action == "shop") 
+        $products = DB::table('product')->where('status',1)->paginate($limit);
         return $products;
     }
     public static function GetOne($id){
@@ -103,6 +107,20 @@ class Product extends Model
             array_push($result, $product);
         }
         return $result;
+    }
+
+    public static function EditProduct($id, $code, $name, $description, $price, $quantity, 
+        $image_url, $sub_category_id, $sale, $status){
+        //$product = Product::find($id);
+        if($code != "" && $name != "" && $description != "" && $price !="" && $quantity!="" && 
+                $image_url != "" && $sub_category_id!="" && $sale!="" && $status!=""){
+                $time = Carbon::now('Asia/Ho_Chi_Minh');
+                $time = $time->toDateTimeString();
+                $bool = DB::update("UPDATE `product` SET `code`='$code' ,`name`='$name' ,`quantity`=$quantity ,`price`=$price ,`description`='$description' 
+                ,`image_url`='$image_url' ,`sub_category_id`= $sub_category_id ,`sale`=$sale,`status`=$status,`updated_at`='$time' WHERE `id` = $id;");
+            if($bool == 1) return redirect()->route('manager-product.index');
+        }
+        
     }
 
 }

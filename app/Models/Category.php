@@ -16,4 +16,5 @@ class Category extends Model
         $categories = DB::select('select * from category');
         return $categories;
     }
+    
 }

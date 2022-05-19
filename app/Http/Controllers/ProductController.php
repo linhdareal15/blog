@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         
-        $products = Product::GetAll();
+        $products = Product::GetAll("shop");
         $c = new Category();
         $categories = $c->GetAll();
         

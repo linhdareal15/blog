@@ -17,9 +17,9 @@ class OrderTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=104;$i<=196;$i++){
+        for($i=1;$i<=300;$i++){
             $s = new Shipping();
-            $s->name = "Người lạ ơi ".$i;
+            $s->name = "Neu Ma Khong Phai Bun ".$i;
             $s->phone = "0345291510";
             $s->address = "Noi nao do";
             $s->save();
@@ -29,15 +29,15 @@ class OrderTableSeeder extends Seeder
             $product = Product::GetOne(rand(1,100));
 
             $o = new Order(
-                "Vũ Hoàng Linh ".$i."",
+                "Neu Ma Khong Phai Bun ".$i."",
                 $shipping_id,
                 $product->price,
                 "Cu giao can than la duoc",
                 1
             );
 
-            $start_date = '2022-04-01';
-            $end_date = '2022-07-01';
+            $start_date = '2022-05-13';
+            $end_date = '2022-05-20';
             $min = strtotime($start_date);
             $max = strtotime($end_date);
             $date_random = rand($min, $max);

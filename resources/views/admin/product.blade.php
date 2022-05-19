@@ -39,7 +39,7 @@ use App\Models\Product;
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
+          <a class="nav-link text-white " href="{{route('dashboard')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -268,12 +268,18 @@ use App\Models\Product;
                         @else
                         <span class="badge badge-sm bg-gradient-danger">Out-Stock</span>
                         @endif
+
+                        @if($item->status == 1 )
+                        <span class="badge badge-sm bg-gradient-primary">Active</span>
+                        @else
+                        <span class="badge badge-sm bg-gradient-danger">De-Active</span>
+                        @endif
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{$item->created_at }}</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="{{route('manager-product.edit', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
                         </a>
                       </td>
@@ -288,7 +294,16 @@ use App\Models\Product;
       </div>
     </div>
   </main>
-  @extends('admin.layouts.pagging')
+
+
+  <!-- paggination -->
+
+  <center><div class="">
+    {{$products->links()}}
+  </div></center>
+  
+  <!-- end paggination -->
+
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="material-icons py-2">settings</i>

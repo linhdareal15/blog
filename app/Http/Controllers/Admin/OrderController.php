@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Status_Order;
 
 class OrderController extends Controller
 {
@@ -14,7 +16,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::GetAll("");
+        $status = Status_Order::GetAll();
+        return view("admin.order")->with('orders',$orders)
+        ->with('status_order',$status);
     }
 
     /**
@@ -46,7 +51,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -55,9 +60,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$status)
     {
-        //
+        if(intval($id) && $status!=""){
+           $bool =  Order::ChangeOrderStatus($id,$status);
+           if($bool == 1) return redirect()->back();
+        }
     }
 
     /**

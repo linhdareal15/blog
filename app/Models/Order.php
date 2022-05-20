@@ -29,6 +29,16 @@ class Order extends Model
         $this->status = $status;
     }
 
+    public static function GetAll($action){
+        $appsetting = file_get_contents('../appsettings.json');
+        $decoded_json = json_decode($appsetting, false);
+        $limit = (integer)$decoded_json->order_paggination;
+        if($action == ""){
+            $result = DB::table('order')->paginate($limit);
+            if($result!=null) return $result;
+        }
+        return null;
+    }
 
     public static function total_order_money_today()
     {
@@ -123,5 +133,12 @@ class Order extends Model
     public static function Statistic_Sale_By_Month(){
         $data = Order::CountOrderByMonth();
         return $data;
+    }
+
+    public static function ChangeOrderStatus($id,$status){
+        $time = Carbon::now('Asia/Ho_Chi_Minh');
+        $time = $time->toDateTimeString();
+        $bool = DB::update("UPDATE `order` SET `status`= $status ,`updated_at`= '$time' WHERE id = $id ");
+        return $bool;
     }
 }

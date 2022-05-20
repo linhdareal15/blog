@@ -1,3 +1,7 @@
+<?php
+
+use App\Models\Product;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('admin/assets/img/favicon.png')}}">
     <title>
-        Product Manager
+        Order Manager
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -43,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-primary" href="{{route('manager-product.index')}}">
+                    <a class="nav-link text-white  " href="{{route('manager-product.index')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">table_view</i>
                         </div>
@@ -51,7 +55,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="{{route('order-manager.index')}}">
+                    <a class="nav-link text-white active bg-gradient-primary " href="{{route('manager-order.index')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -210,82 +214,100 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        <!-- Main -->
-        <div class="row col-md-12 justify-content-center">
-            <div class="col-md-4">
-                <?php
-                    $image = 'img/'.$product->image_url;
-                ?>
-                <img class="img-fluid border-radius-md" src="{{asset($image)}}" alt="dasdasd">
-            </div>
-            <div class="col-md-5">
-                <form method="POST" action="{{route('manager-product.store')}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$product->id}}" />
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Code</label>
-                        <input type="text" name="code" class="form-control" value="{{$product->code}}">
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Orders table</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Id</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Customer Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total Price</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
+                                            <th class="text-secondary opacity-7"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($orders as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <i class="material-icons text-dark text-gradient">payments</i>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">&nbsp; #{{$item->id}}</h6>
+                                                        <!-- <p class="text-xs text-secondary mb-0">john@creative-tim.com</p> -->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{$item->customer_name}}
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-success">{{number_format($item->total_price,0,'.',',')}}₫</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                @foreach($status_order as $status)
+                                                    @if($item->status == $status->id)
+                                                        <span class="badge badge-sm bg-gradient-warning">{{$status->status}}</span>
+                                                    @endif
+                                                @endforeach
+                                                <div class="dropdown mt-2">
+                                                    <a href="" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+                                                        Status
+                                                    </a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                                        @foreach($status_order as $status)
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{route('manager-order.edit',$item->id)}}/{{$status->id}}">
+                                                                {{$status->status}}
+                                                            </a>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">{{$item->created_at }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a href="{{route('manager-product.edit', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Product Name</label>
-                        <input type="text" name="name" class="form-control" value="{{$product->name}}">
-                    </div>
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label"></label>
-                        <textarea id="content" name="description">{{$product->description}}</textarea>
-                        <!-- <input type="url" class="form-control"> -->
-                    </div>
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Quantity</label>
-                        <input type="number" name="quantity" class="form-control" value='{{$product->quantity}}'>
-                    </div>
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control" value='{{$product->price}}'>
-                    </div>
-                    <div class="input-group input-group-outline my-3">
-                        <!-- <label class="form-label">Sub_category</label> -->
-                        <select name="sub_category_id" class="form-control">
-                            @foreach($sub_category as $item)
-                                <option value="{{$item->id}}" <?php 
-                                    if($product->sub_category_id == $item->id)
-                                        echo 'selected';
-                                ?> > 
-                                {{$item->sub_category_name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="input-group input-group-static my-3">
-                        <label>Image</label>
-                        <input type="text" name="image_url" class="form-control" value ="{{$product->image_url}}">
-                    </div>
-                    <div class="input-group input-group-static my-3">
-                        <label>Sale</label>
-                        <input type="text" name="sale" class="form-control" value="{{$product->sale}}">
-                    </div>
-                    <div class="input-group input-group-static my-3">
-                        <label>Status</label>
-                        <input type="number" name="status" class="form-control" value="{{$product->status}}">
-                    </div>
-                    <div class="input-group input-group-static my-3">
-                        <button class="btn btn-primary" type="button">
-                            <input type="submit" class="form-control">
-                        </button>
-                    </div>
-                </form>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
+                </div>
             </div>
         </div>
     </main>
-    <!-- End Main -->
+
+
+    <!-- paggination -->
+
+    <center>
+        <div class="">
+            {{$orders->links()}}
+        </div>
+    </center>
+
+    <!-- end paggination -->
+
     <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="material-icons py-2">settings</i>
@@ -361,11 +383,11 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="{{asset('admin/assets/js/core/popper.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/core/bootstrap.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/plugins/chartjs.min.js')}}"></script>
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/core/bootstrap.min.js"></script>
+    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -379,13 +401,6 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('admin/assets/js/material-dashboard.min.js?v=3.0.2')}}"></script>
-    <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>
-
-    <script>
-        CKEDITOR.replace('content');
-    </script>
-
 </body>
-
 
 </html>

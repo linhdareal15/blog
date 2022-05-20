@@ -14,8 +14,10 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
+        
         //$this->middleware('guest')->except('logout');
-        if ($request->getMethod() == 'GET') {
+        if ($request->getMethod() == 'GET' && Auth::check()==false) {
+            // dd(Auth::check());
             return view('admin.auth.login');
         }
 

@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('admin.login');
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->middleware('guest')->name('admin.login');
 Route::middleware('auth:admin')->group(function (){
     Route::get('/logout', 'App\Http\Controllers\Admin\Auth\LogoutController@perform')->name('logout.perform');
     Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index')->name('dashboard');

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 class OrderDetail extends Model
 {
@@ -25,5 +26,13 @@ class OrderDetail extends Model
         $this->product_name = $product->name;
         $this->price = $product->price;
         $this->quantity = $quantity;
+    }
+
+    public static function GetOne($id){
+       $result =  DB::table('order_detail')->where('order_id',$id)->get();
+       if($result !=null){
+           return $result;
+       }
+       return null;
     }
 }

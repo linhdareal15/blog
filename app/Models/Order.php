@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\OrderDetail;
+use App\Models\Shipping;
 use Carbon\Carbon;
 
 class Order extends Model
@@ -37,6 +39,12 @@ class Order extends Model
             $result = DB::table('order')->paginate($limit);
             if($result!=null) return $result;
         }
+        return null;
+    }
+
+    public static function GetOne($id){
+        $result = DB::table('order')->where('id', $id)->get();
+        if($result!=null) return $result;
         return null;
     }
 

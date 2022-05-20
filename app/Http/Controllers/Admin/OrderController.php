@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Shipping;
 use App\Models\Status_Order;
 
 class OrderController extends Controller
@@ -51,6 +53,20 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        if(intval($id)){
+            $order = Order::GetOne($id);
+            $order_detail = null;
+            $shipping = null;
+            foreach($order as $o){
+                $order_detail = OrderDetail::GetOne($o->id);
+                $shipping = Shipping::GetOne($o->shipping_id);
+            }
+            if($order_detail !=null && $shipping !=null){
+                return view('admin.editorder')->with('order_detail',$order_detail)
+                ->with('shipping',$shipping)
+                ->with('order',$order);
+            }
+        }
         
     }
 

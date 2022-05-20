@@ -37,7 +37,7 @@ class ShopController extends Controller
                         "price" => $row->price,
                     );
                 }
-                return redirect()->route('product.index');
+                return redirect()->back();
             } else {
                 $message = "This product id it's invalid!";
                 print_r($message);

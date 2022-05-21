@@ -264,11 +264,12 @@ use App\Models\Product;
                                                         <span class="badge badge-sm bg-gradient-warning">{{$status->status}}</span>
                                                     @endif
                                                 @endforeach
-                                                <div class="dropdown mt-2">
+                                                <div class="dropdown mt-2" <?php 
+                                                        if($item->status == 4 || $item->status == 5) echo "hidden";?>>
                                                     <a href="" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
                                                         Status
                                                     </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                                    <ul class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink2">
                                                         @foreach($status_order as $status)
                                                         <li>
                                                             <a class="dropdown-item" href="{{route('manager-order.edit',$item->id)}}/{{$status->id}}">

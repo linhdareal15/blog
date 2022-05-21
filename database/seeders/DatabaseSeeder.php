@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
         //$this->call(ProductTableSeeder::class);
         //$this->call(UsersTableSeeder::class);
         $this->call(OrderTableSeeder::class);
-        // DB::table('admins')->insert([
-        //     [
-        //         'name' => 'Admin',
-        //         'email' => 'admin@gmail.com',
-        //         'password' => bcrypt('Admin123'),
-        //     ]
-        // ]);
+        DB::table('admins')->insert([
+            [
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('Admin123'),
+            ]
+        ]);
 
     }
 }

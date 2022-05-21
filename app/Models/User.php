@@ -48,12 +48,17 @@ class User extends Authenticatable
         return $total;
     }
     public static function today_users_count(){
-        $today = Carbon::now()->format('m-d-Y');
-        $total = DB::select('SELECT Count(id) as user_today_count FROM `users` WHERE created_at >='.$today);
-        foreach ($total as $t){
-            $total = $t->user_today_count;
-        }
-        if($total==null) $total = 0;
+        Carbon::now()->timezone('Asia/Ho_Chi_Minh');
+        $date = Carbon::now()->format('Y-m-d');
+        $from = $date . ' 00:00:00';
+        $to = $date . ' 23:59:59';
+        $total  = DB::table('users')->whereBetween('created_at', [$from, $to])->count();
+        // $today = Carbon::now()->format('m-d-Y');
+        // $total = DB::select('SELECT Count(id) as user_today_count FROM `users` WHERE created_at >='.$today);
+        // foreach ($total as $t){
+        //     $total = $t->user_today_count;
+        // }
+        // if($total==null) $total = 0;
         return $total;
     }
 }

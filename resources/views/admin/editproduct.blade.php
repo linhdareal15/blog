@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="{{route('order-manager.index')}}">
+                    <a class="nav-link text-white " href="{{route('manager-order.index')}}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">receipt_long</i>
                         </div>
@@ -220,7 +220,7 @@
                 <img class="img-fluid border-radius-md" src="{{asset($image)}}" alt="dasdasd">
             </div>
             <div class="col-md-5">
-                <form method="POST" action="{{route('manager-product.store')}}">
+                <form method="POST" enctype="multipart/form-data" action="{{route('manager-product.store')}}">
                     @csrf
                     <input type="hidden" name="id" value="{{$product->id}}" />
                     <div class="input-group input-group-outline my-3">
@@ -259,6 +259,10 @@
                     <div class="input-group input-group-static my-3">
                         <label>Image</label>
                         <input type="text" name="image_url" class="form-control" value ="{{$product->image_url}}">
+                    </div>
+                    <div class="input-group input-group-static my-3">
+                        <label>Image File</label>
+                        <input type="file" id="photo" accept="image/*" name="photo" class="form-control" value ="">
                     </div>
                     <div class="input-group input-group-static my-3">
                         <label>Sale</label>

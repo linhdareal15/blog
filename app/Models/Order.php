@@ -149,4 +149,6 @@ class Order extends Model
         $bool = DB::update("UPDATE `order` SET `status`= $status ,`updated_at`= '$time' WHERE id = $id ");
         return $bool;
     }
+
+    
 }

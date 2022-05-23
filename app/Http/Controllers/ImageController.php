@@ -1,28 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\SubCategory;
-use App\Http\Requests\ProductRequest;
 
-class ProductController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct(){
-    //     $this->middleware('auth:admin');
-    // }
     public function index()
     {
-        $products = Product::GetAll("");
-
-        return view('admin.product')->with('products',$products);
+        //
     }
 
     /**
@@ -41,16 +32,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-        $photo = $request->file('photo'); 
-        $bool = Product::EditProduct($data['id'], $data['code'],$data['name'],$data['description'],
-                    $data['price'],$data['quantity'], $data['image_url'],$data['sub_category_id'],
-                    $data['sale'],$data['status']);
-        if($bool == true){
-            return redirect()->route('manager-product.index');
-        }
+        $validator = $request->validate([
+            'product_id' => ['required','numeric'],
+            'image' => ['required','image'],
+            ]
+        );
     }
 
     /**
@@ -72,13 +60,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        if(intval($id)){
-            $sub_category = SubCategory::GetAll();
-            $product = Product::GetOne($id);
-            return view('admin.editproduct')
-            ->with('product', $product)
-            ->with('sub_category', $sub_category);
-        }
+        //
     }
 
     /**
@@ -102,9 +84,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-    protected function storeImage(Request $request) {
-        $path = $request->file('photo')->store('public/profile');
-        return substr($path, strlen('public/'));
     }
 }

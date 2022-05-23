@@ -264,7 +264,7 @@ use App\Models\Product;
                                                         <span class="badge badge-sm bg-gradient-warning">{{$status->status}}</span>
                                                     @endif
                                                 @endforeach
-                                                <div class="dropdown mt-2">
+                                                <div class="dropdown mt-2" <?php if($item->status ==4 || $item->status == 5) echo "hidden";?>>
                                                     <a href="" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
                                                         Status
                                                     </a>
@@ -283,7 +283,7 @@ use App\Models\Product;
                                                 <span class="text-secondary text-xs font-weight-bold">{{$item->created_at }}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{route('manager-product.show', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                <a href="{{route('manager-order.show', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
                                             </td>

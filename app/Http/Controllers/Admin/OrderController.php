@@ -57,14 +57,26 @@ class OrderController extends Controller
             $order = Order::GetOne($id);
             $order_detail = null;
             $shipping = null;
+            $order_id = 0;
+            $customer_name = "";
+            $order_at = "";
+            $order_total_price = 0;
             foreach($order as $o){
                 $order_detail = OrderDetail::GetOne($o->id);
                 $shipping = Shipping::GetOne($o->shipping_id);
+                $order_id = $o->id;
+                $customer_name = $o->customer_name;
+                $order_at = $o->created_at;
+                $order_total_price = $o->total_price;
             }
             if($order_detail !=null && $shipping !=null){
                 return view('admin.editorder')->with('order_detail',$order_detail)
                 ->with('shipping',$shipping)
-                ->with('order',$order);
+                ->with('orders',$order)
+                ->with('order_id',$order_id)
+                ->with('customer_name',$customer_name)
+                ->with('order_at',$order_at)
+                ->with('order_total_price',$order_total_price);
             }
         }
         

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_id');
             $table->string('image_url');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
         }

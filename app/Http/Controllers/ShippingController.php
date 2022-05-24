@@ -6,6 +6,8 @@ use App\Models\Shipping;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\OrderLogs;
+
 
 if(!isset($_SESSION)){
     session_start();
@@ -21,13 +23,7 @@ class ShippingController extends Controller{
         $name = $_POST['name'];
         $phone = $_POST['phone']; 
         $address = $_POST['address'];
-        $shipping = new Shipping;
-        $shipping->name = $name;
-        $shipping->phone = $phone;
-        $shipping->address = $address;
-        $shipping->save();
-        
-        $shipping_id = $shipping->id;
+        $shipping_id = Shipping::AddNewShipping($name,$phone,$address);
         $total_price = $_SESSION['tong'];
         $note = $_POST['note'] !=null ? $_POST['note'] : "";
         $order = new Order($name,$shipping_id,$total_price,$note,1);
@@ -40,15 +36,15 @@ class ShippingController extends Controller{
                 $order_detail = new OrderDetail($order_id,$product,$item['quantity']);
                 $order_detail->save();
             }
-            
         }
-            unset($_SESSION['cart']);
+        $log = "Order #".$order_id." has been created";
+        OrderLogs::CreateLog($order_id,$log);
+
+        unset($_SESSION['cart']);
 
         return redirect()->route('home');
     }
 
 
-    
-    
 
 }

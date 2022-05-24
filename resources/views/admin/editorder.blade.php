@@ -1,5 +1,6 @@
 <?php
-    use App\Models\Product;
+
+use App\Models\Product;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -252,7 +253,7 @@
                                     <div class="card">
                                         <div class="card-header mx-4 p-3 text-center">
                                             <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                                            <i class="material-icons opacity-10">account_balance_wallet</i>
+                                                <i class="material-icons opacity-10">account_balance_wallet</i>
                                             </div>
                                         </div>
                                         <div class="card-body pt-0 p-3 text-center">
@@ -288,9 +289,9 @@
                                             <h6 class="mb-0">Payment Method</h6>
                                         </div>
                                         <div class="col-6 text-end">
-                                        <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
-                                        <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>    
-                                        <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
+                                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
+                                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
+                                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Card</a>
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +335,7 @@
                                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                     <div class="d-flex flex-column">
                                         <?php
-                                            $item = Product::GetOne($od->product_id);
+                                        $item = Product::GetOne($od->product_id);
                                         ?>
                                         <h6 class="mb-1 text-dark font-weight-bold text-sm">Product: {{$item->name}}</h6>
                                         <span class="text-xs">Quantity: {{$od->quantity}}</span>
@@ -358,20 +359,63 @@
                         </div>
                         <div class="card-body pt-4 p-3">
                             <ul class="list-group">
-                                
+
                                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                     <div class="d-flex flex-column">
-                                    @foreach($shipping as $ship)
+                                        @foreach($shipping as $ship)
                                         <h6 class="mb-3 text-sm">{{$ship->name}}</h6>
                                         <span class="mb-2 text-xs">Phone: <span class="text-dark font-weight-bold ms-sm-2">{{$ship->phone}}</span></span>
                                         <span class="mb-2 text-xs">Address: <span class="text-dark ms-sm-2 font-weight-bold">{{$ship->address}}</span></span>
                                         <span class="text-xs">Note: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                                        @endforeach
+
                                     </div>
                                     <div class="ms-auto text-end">
-                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
-                                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                                        <!-- <i  class="material-icons text-sm me-2">delete</i>Delete -->
+                                        <button type="button" class="btn bg-gradient-primary btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalSignUp">
+                                            <i  class="material-icons text-sm me-2">edit</i>Edit
+                                        </button>
                                     </div>
+                                    <div class="col-md-4">
+                                        <!-- Button trigger modal -->
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body p-0">
+                                                        <div class="card card-plain">
+                                                            <div class="card-header pb-0 text-left">
+                                                                <h5 class="">Edit Shipping Information</h5>
+                                                                <p class="mb-0">Enter information</p>
+                                                            </div>
+                                                            <div class="card-body pb-3">
+                                                                <form role="form text-left" action="{{route('manager-shipping.store',$ship->id)}}" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id" value = "{{$ship->id}}">
+                                                                    <div class="input-group input-group-outline my-3">
+                                                                        <label class="form-label">Name</label>
+                                                                        <input type="text" name="customer_name" class="form-control" value="{{$ship->name}}">
+                                                                    </div>
+                                                                    <div class="input-group input-group-outline my-3">
+                                                                        <label class="form-label">Phone</label>
+                                                                        <input type="phone" name="phone" class="form-control" value="{{$ship->phone}}">
+                                                                    </div>
+                                                                    <div class="input-group input-group-outline my-3">
+                                                                        <label class="form-label">Address</label>
+                                                                        <input type="text" name="address" class="form-control" value="{{$ship->address}}">
+                                                                    </div>
+                                                                    <div class="text-center">
+                                                                        <button type="submit" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Edit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
                                 </li>
                             </ul>
                         </div>
@@ -393,21 +437,23 @@
                         <div class="card-body pt-4 p-3">
                             <!-- <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6> -->
                             <ul class="list-group">
+                                @foreach($order_log as $log)
                                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                     <div class="d-flex align-items-center">
                                         <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_more</i></button>
                                         <div class="d-flex flex-column">
-                                            <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                                            <span class="text-xs">27 March 2020, at 12:30 PM</span>
+                                            <h6 class="mb-1 text-dark text-sm">{{$log->log}}</h6>
+                                            <span class="text-xs">{{$log->created_at}}</span>
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                    <!-- <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
                                         - $ 2,500
-                                    </div>
+                                    </div> -->
                                 </li>
-                            </ul>
-                            <!-- <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6> -->
-                            <ul class="list-group">
+                                @endforeach
+                                <!-- </ul> -->
+                                <!-- <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6> -->
+                                <!-- <ul class="list-group"> -->
                                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                     <div class="d-flex align-items-center">
                                         <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
@@ -418,30 +464,6 @@
                                     </div>
                                     <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
                                         + $ 750
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                    <div class="d-flex align-items-center">
-                                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
-                                        <div class="d-flex flex-column">
-                                            <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
-                                            <span class="text-xs">26 March 2020, at 12:30 PM</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                                        + $ 1,000
-                                    </div>
-                                </li>
-                                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                    <div class="d-flex align-items-center">
-                                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
-                                        <div class="d-flex flex-column">
-                                            <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
-                                            <span class="text-xs">26 March 2020, at 08:30 AM</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                                        + $ 2,500
                                     </div>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -570,11 +592,11 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="./assets/js/core/popper.min.js"></script>
-    <script src="./assets/js/core/bootstrap.min.js"></script>
-    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/chartjs.min.js"></script>
+    <script src="{{asset('admin/assets/js/core/popper.min.js')}}"></script>
+  <script src="{{asset('admin/assets/js/core/bootstrap.min.js')}}"></script>
+  <script src="{{asset('admin/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{asset('admin/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="{{asset('admin/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

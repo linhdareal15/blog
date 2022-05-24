@@ -10,6 +10,7 @@ Route::middleware('auth:admin')->group(function (){
     Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index')->name('dashboard');
     Route::resource('/manager-product','App\Http\Controllers\Admin\ProductController');
     Route::resource('/manager-order','App\Http\Controllers\Admin\OrderController');
+    Route::resource('/manager-shipping','App\Http\Controllers\Admin\ShippingController');
     Route::get('manager-order/{id}/edit/{status}', 'App\Http\Controllers\Admin\OrderController@edit');
 });
 

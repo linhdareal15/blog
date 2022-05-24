@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Shipping;
 use App\Models\Status_Order;
+use App\Models\OrderLogs;
 
 class OrderController extends Controller
 {
@@ -55,6 +56,7 @@ class OrderController extends Controller
     {
         if(intval($id)){
             $order = Order::GetOne($id);
+            $order_log = OrderLogs::GetOrderLog($id);
             $order_detail = null;
             $shipping = null;
             $order_id = 0;
@@ -76,7 +78,8 @@ class OrderController extends Controller
                 ->with('order_id',$order_id)
                 ->with('customer_name',$customer_name)
                 ->with('order_at',$order_at)
-                ->with('order_total_price',$order_total_price);
+                ->with('order_total_price',$order_total_price)
+                ->with('order_log', $order_log);
             }
         }
         
@@ -92,7 +95,11 @@ class OrderController extends Controller
     {
         if(intval($id) && $status!=""){
            $bool =  Order::ChangeOrderStatus($id,$status);
-           if($bool == 1) return redirect()->back();
+           if($bool == 1){
+               $log = "Status changed ";
+               OrderLogs::CreateLog($id , $log);
+            return redirect()->back();
+           } 
         }
     }
 

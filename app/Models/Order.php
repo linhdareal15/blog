@@ -30,7 +30,7 @@ class Order extends Model
         $this->note = $note;
         $this->status = $status;
     }
-
+    
     public static function GetAll($action){
         $appsetting = file_get_contents('../appsettings.json');
         $decoded_json = json_decode($appsetting, false);

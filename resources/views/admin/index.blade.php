@@ -710,7 +710,7 @@
                   </div>
                 </div> -->
                 @foreach ($seven_newest_order as $order)
-                <a href="{{route('manager-order.show', $item->id)}}" style="text-decoration: none;"><div class="timeline-block">
+                <a href="{{route('manager-order.show', $order->id)}}" style="text-decoration: none;"><div class="timeline-block">
                   <span class="timeline-step">
                     <i class="material-icons text-dark text-gradient">payments</i>
                   </span>

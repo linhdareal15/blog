@@ -150,5 +150,10 @@ class Order extends Model
         return $bool;
     }
 
+    public static function search($key){
+        $result = DB::table('order')->where('id', 'like', '%' . $key . '')->paginate(10);
+        if($result != null) return $result;
+        return null;
+    }
     
 }

@@ -48,8 +48,10 @@ class User extends Authenticatable
         return $total;
     }
     public static function today_users_count(){
-        $today = Carbon::now()->format('m-d-Y');
-        $total = DB::select('SELECT Count(id) as user_today_count FROM `users` WHERE created_at >='.$today);
+        $today = Carbon::now()->format('Y-m-d');
+        $from = $today.' 00:00:00';
+        $to = $today.' 23:59:59';
+        $total = DB::select("SELECT Count(id) as user_today_count FROM `users` WHERE created_at BETWEEN '$from' AND '$to'");
         foreach ($total as $t){
             $total = $t->user_today_count;
         }

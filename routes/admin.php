@@ -12,5 +12,6 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('/manager-order','App\Http\Controllers\Admin\OrderController');
     Route::resource('/manager-shipping','App\Http\Controllers\Admin\ShippingController');
     Route::get('manager-order/{id}/edit/{status}', 'App\Http\Controllers\Admin\OrderController@edit');
+    Route::get('/search','App\Http\Controllers\Admin\SearchController@SearchProduct')->name('search');
 });
 

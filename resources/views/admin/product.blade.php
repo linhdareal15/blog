@@ -109,12 +109,17 @@ use App\Models\Product;
           <h6 class="font-weight-bolder mb-0">Tables</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        <form method="get" action="{{route('search')}}" name="searchform" id="searchform">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
+            
+              <label class="form-label">Search by name</label>
+              <input type="text" class="form-control" name ="param">
+              
             </div>
           </div>
+          </form>
+          
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
+use function PHPUnit\Framework\returnSelf;
+
 if(!isset($_SESSION)){
     session_start();
 }
@@ -122,5 +124,12 @@ class Product extends Model
         }
         
     }
+
+    public static function search($key){
+        $result = DB::table('product')->where('name', 'like', '%' . $key . '%')->paginate(10);
+        if($result != null) return $result;
+        return null;
+    }
+
 
 }

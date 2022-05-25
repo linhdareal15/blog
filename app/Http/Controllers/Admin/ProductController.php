@@ -21,8 +21,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::GetAll("");
-
         return view('admin.product')->with('products',$products);
+        
     }
 
     /**

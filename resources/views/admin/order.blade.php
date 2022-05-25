@@ -272,7 +272,7 @@ use App\Models\Product;
                                                     </a>
                                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                                         @foreach($status_order as $status)
-                                                        <li>
+                                                        <li <?php if($status->id == $item->status || $item->status >=$status->id) echo "hidden"?>>
                                                             <a class="dropdown-item" href="{{route('manager-order.edit',$item->id)}}/{{$status->id}}">
                                                                 {{$status->status}}
                                                             </a>

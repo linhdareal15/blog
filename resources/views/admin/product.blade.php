@@ -32,7 +32,7 @@ use App\Models\Product;
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
         <img src="{{asset('admin/assets/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+        <span class="ms-1 font-weight-bold text-white">LV Shop Managerment</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -228,6 +228,7 @@ use App\Models\Product;
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Products table</h6>
+                <a href="#" style="text-decoration: none"><h8 class="text-white text-capitalize ps-3">Add product</h8></a>
               </div>
             </div>
             <div class="card-body px-0 pb-2">

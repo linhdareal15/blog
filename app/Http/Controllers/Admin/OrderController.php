@@ -95,8 +95,9 @@ class OrderController extends Controller
     {
         if(intval($id) && $status!=""){
            $bool =  Order::ChangeOrderStatus($id,$status);
+           $status_name = Status_Order::GetName($status);
            if($bool == 1){
-               $log = "Status changed ";
+               $log = "Status changed to ".$status_name;
                OrderLogs::CreateLog($id , $log);
             return redirect()->back();
            } 

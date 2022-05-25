@@ -454,7 +454,7 @@ use App\Models\Product;
                                 <!-- </ul> -->
                                 <!-- <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Yesterday</h6> -->
                                 <!-- <ul class="list-group"> -->
-                                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                <!-- <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                     <div class="d-flex align-items-center">
                                         <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i class="material-icons text-lg">expand_less</i></button>
                                         <div class="d-flex flex-column">
@@ -477,7 +477,7 @@ use App\Models\Product;
                                     <div class="d-flex align-items-center text-dark text-sm font-weight-bold">
                                         Pending
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>

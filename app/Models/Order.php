@@ -99,6 +99,14 @@ class Order extends Model
         if ($result == 0) $result = 0;
         return $result;
     }
+    public static function CountOrderCancelledByDay($date)
+    {
+        $from = $date . ' 00:00:00';
+        $to = $date . ' 23:59:59';
+        $result = DB::table('order')->where('status', 5)->whereBetween('created_at', [$from, $to])->count();
+        if ($result == 0) $result = 0;
+        return $result;
+    }
 
     public static function CountOrderByMonth()
     {

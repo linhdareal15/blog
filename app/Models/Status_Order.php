@@ -18,4 +18,12 @@ class Status_Order extends Model
         $result = DB::table('status_order')->get();
         return $result;
     }
+
+    public static function GetName($id){
+        $result = DB::table('status_order')->where('id',$id)->get();
+        foreach($result as $item){
+            return $item->status;
+        }
+        
+    }
 }

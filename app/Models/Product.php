@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Hamcrest\Type\IsInteger;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-
+use App\Http\Requests\ProductRequest;
 use function PHPUnit\Framework\returnSelf;
 
 if(!isset($_SESSION)){
@@ -56,7 +56,7 @@ class Product extends Model
     }
     public static function GetOne($id){
         if(intval($id)){
-            $result = DB::select("select * from `product` where `id` = $id");
+            $result = DB::select("select * from `product` where `id` = $id AND `status`=1");
             $result = (array)$result;
             foreach($result as $item){
                 $p = new Product($item->id,$item->code, $item->name, $item->quantity, $item->price, $item->description, 
@@ -131,5 +131,45 @@ class Product extends Model
         return null;
     }
 
+    public static function storeImage(ProductRequest $request) {
+        $fileName = $request->get('code') . '.' . $request->file('photo')->extension();      
+        $path = $request->file('photo')->storeAs('public/product',$fileName);
+        return $path;
+    }
+
+    public static function GetLastID(){
+        $result = DB::select('SELECT MAX(id) as max FROM `product`');
+        foreach($result as $item)
+            return $item->max;
+    }
+
+    public static function create_new(ProductRequest $request){
+        $data = $request->all();
+        $id = Product::GetLastID();
+        $id = $id+1;
+        $code = $data['code'];
+        $product_name = $data['name'];
+        $description = $data['description'];
+        $quantity = $data['quantity'];
+        $price = $data['price'];
+        $sub_category_id = $data['sub_category_id'];
+        $sale = $data['sale'];
+        $status = $data['status'];
+        $image_url = Product::storeImage($request);
+        $p = new Product($id,$code, $product_name, $quantity, $price, $description, $image_url, $status, $sub_category_id, $sale);
+        $p->save();
+        // Product::create([
+        //     'id'=> 10000,
+        //     'code' => $code,
+        //     'name' => $product_name,
+        //     'quantity' => $quantity,
+        //     'price' => $price,
+        //     'description' => $description,
+        //     'image_url' => $image_url,
+        //     'status' => $status,
+        //     'sub_category_id' => $sub_category,
+        //     'sale' => $sale
+        // ]);
+    }
 
 }

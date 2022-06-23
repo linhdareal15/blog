@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('admin/assets/img/favicon.png')}}">
     <title>
-        Edit Product
+        Product Manager
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -213,64 +213,54 @@
         <!-- End Navbar -->
         <!-- Main -->
         <div class="row col-md-12 justify-content-center">
-            <div class="col-md-4">
-                <?php
-                    $image = 'img/'.$product->image_url;
-                ?>
-                <img class="img-fluid border-radius-md" src="{{asset($image)}}" alt="dasdasd">
-            </div>
+            <!-- <div class="col-md-4">
+                <img class="img-fluid border-radius-md" alt="">
+            </div> -->
             <div class="col-md-5">
-                <form method="POST" enctype="multipart/form-data" action="{{route('manager-product.store')}}">
+                <form method="POST" enctype="multipart/form-data" action="{{route('add-product')}}">
                     @csrf
-                    <input type="hidden" name="id" value="{{$product->id}}" />
+                    <input type="hidden" name="id" value="" />
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Code</label>
-                        <input type="text" name="code" class="form-control" value="{{$product->code}}">
+                        <input type="text" name="code" class="form-control">
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Product Name</label>
-                        <input type="text" name="name" class="form-control" value="{{$product->name}}">
+                        <input type="text" name="name" class="form-control">
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label"></label>
-                        <textarea id="content" name="description">{{$product->description}}</textarea>
+                        <textarea id="content" name="description"></textarea>
                         <!-- <input type="url" class="form-control"> -->
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Quantity</label>
-                        <input type="number" name="quantity" class="form-control" value='{{$product->quantity}}'>
+                        <input type="number" name="quantity" class="form-control">
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control" value='{{$product->price}}'>
+                        <input type="number" name="price" class="form-control">
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <!-- <label class="form-label">Sub_category</label> -->
                         <select name="sub_category_id" class="form-control">
                             @foreach($sub_category as $item)
-                                <option value="{{$item->id}}" <?php 
-                                    if($product->sub_category_id == $item->id)
-                                        echo 'selected';
-                                ?> > 
+                                <option value="{{$item->id}}"> 
                                 {{$item->sub_category_name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="input-group input-group-static my-3">
-                        <label>Image</label>
-                        <input type="text" name="image_url" class="form-control" value ="{{$product->image_url}}">
-                    </div>
-                    <div class="input-group input-group-static my-3">
                         <label>Image File</label>
-                        <input type="file" id="photo" accept="image/*" name="photo" class="form-control" value ="">
+                        <input type="file" id="photo" accept="image/*" name="photo" class="form-control">
                     </div>
                     <div class="input-group input-group-static my-3">
                         <label>Sale</label>
-                        <input type="text" name="sale" class="form-control" value="{{$product->sale}}">
+                        <input type="text" name="sale" class="form-control">
                     </div>
                     <div class="input-group input-group-static my-3">
                         <label>Status</label>
-                        <input type="number" name="status" class="form-control" value="{{$product->status}}">
+                        <input type="number" name="status" class="form-control">
                     </div>
                     <div class="input-group input-group-static my-3">
                         <button class="btn btn-primary" type="button">

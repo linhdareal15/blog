@@ -109,12 +109,14 @@ use App\Models\Product;
                     <h6 class="font-weight-bolder mb-0">Tables</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <form action="{{route('search-order')}}" method="get">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <div class="input-group input-group-outline">
                             <label class="form-label">Type here...</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="param">
                         </div>
                     </div>
+                    </form>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
@@ -264,14 +266,18 @@ use App\Models\Product;
                                                         <span class="badge badge-sm bg-gradient-warning">{{$status->status}}</span>
                                                     @endif
                                                 @endforeach
+<<<<<<< HEAD
                                                 <div class="dropdown mt-2" <?php 
                                                         if($item->status == 4 || $item->status == 5) echo "hidden";?>>
+=======
+                                                <div class="dropdown mt-2" <?php if($item->status ==4 || $item->status == 5) echo "hidden";?>>
+>>>>>>> aacf5a052d9fdce6484f6fc1b6aa886dff2466d9
                                                     <a href="" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
                                                         Status
                                                     </a>
                                                     <ul class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink2">
                                                         @foreach($status_order as $status)
-                                                        <li>
+                                                        <li <?php if($status->id == $item->status || $item->status >=$status->id) echo "hidden"?>>
                                                             <a class="dropdown-item" href="{{route('manager-order.edit',$item->id)}}/{{$status->id}}">
                                                                 {{$status->status}}
                                                             </a>
@@ -284,7 +290,7 @@ use App\Models\Product;
                                                 <span class="text-secondary text-xs font-weight-bold">{{$item->created_at }}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{route('manager-product.show', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                <a href="{{route('manager-order.show', $item->id)}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
                                             </td>
@@ -386,11 +392,11 @@ use App\Models\Product;
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="./assets/js/core/popper.min.js"></script>
-    <script src="./assets/js/core/bootstrap.min.js"></script>
-    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="./assets/js/plugins/chartjs.min.js"></script>
+    <script src="{{asset('admin/assets/js/core/popper.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

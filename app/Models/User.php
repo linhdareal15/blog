@@ -48,6 +48,7 @@ class User extends Authenticatable
         return $total;
     }
     public static function today_users_count(){
+<<<<<<< HEAD
         Carbon::now()->timezone('Asia/Ho_Chi_Minh');
         $date = Carbon::now()->format('Y-m-d');
         $from = $date . ' 00:00:00';
@@ -59,6 +60,16 @@ class User extends Authenticatable
         //     $total = $t->user_today_count;
         // }
         // if($total==null) $total = 0;
+=======
+        $today = Carbon::now()->format('Y-m-d');
+        $from = $today.' 00:00:00';
+        $to = $today.' 23:59:59';
+        $total = DB::select("SELECT Count(id) as user_today_count FROM `users` WHERE created_at BETWEEN '$from' AND '$to'");
+        foreach ($total as $t){
+            $total = $t->user_today_count;
+        }
+        if($total==null) $total = 0;
+>>>>>>> aacf5a052d9fdce6484f6fc1b6aa886dff2466d9
         return $total;
     }
 }

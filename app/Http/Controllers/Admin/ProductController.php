@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -20,8 +21,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::GetAll("");
-
         return view('admin.product')->with('products',$products);
+        
     }
 
     /**
@@ -31,7 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -40,8 +41,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
+<<<<<<< HEAD
         $validator = $request->validate([
             'code' => ['required', 'max:10'],
             'name' => ['required', 'max:255'],
@@ -54,7 +56,10 @@ class ProductController extends Controller
             'status' => ['required','numeric']
         ]);
 
+=======
+>>>>>>> aacf5a052d9fdce6484f6fc1b6aa886dff2466d9
         $data = $request->all();
+        $photo = $request->file('photo'); 
         $bool = Product::EditProduct($data['id'], $data['code'],$data['name'],$data['description'],
                     $data['price'],$data['quantity'], $data['image_url'],$data['sub_category_id'],
                     $data['sale'],$data['status']);
@@ -112,5 +117,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+    protected function storeImage(Request $request) {
+        $path = $request->file('photo')->store('public/profile');
+        return substr($path, strlen('public/'));
     }
 }

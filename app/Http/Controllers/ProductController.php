@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-
 class ProductController extends Controller
 {
     /**
@@ -17,7 +16,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
         $products = Product::GetAll("shop");
         $c = new Category();
         $categories = $c->GetAll();
@@ -54,16 +52,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-            $product = Product::GetOne($id);
-           // $image = DB::select("Select * from `image` where product_id = $id AND status= 1");
-            if($product != null){
-                //dd($product);
-                $product = (array)$product;
-                return View::make('detail')->with('product',$product);
-            }else{
-                return redirect()->route('product.index')->with('msg',"Khong co san pham");
-            }
-        
+        $product = Product::GetOne($id);
+        if($product!=null){
+            $product = array($product);
+            return view('detail')->with('product',$product);
+        }
     }
 
     /**
@@ -99,5 +92,4 @@ class ProductController extends Controller
     {
         //
     }
-    
 }

@@ -47,7 +47,7 @@ class ProductController extends Controller
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:1000'],
             'price'=>['required','numeric','max:500000'],
-            'quantity' => ['required','numeric','max:4'],
+            'quantity' => ['required','numeric','max:1000'],
             'image_url' => ['required'],
             'sub_category_id' => ['required'],
             'sale' => ['required','numeric','max:1'],

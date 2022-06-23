@@ -266,12 +266,8 @@ use App\Models\Product;
                                                         <span class="badge badge-sm bg-gradient-warning">{{$status->status}}</span>
                                                     @endif
                                                 @endforeach
-<<<<<<< HEAD
                                                 <div class="dropdown mt-2" <?php 
                                                         if($item->status == 4 || $item->status == 5) echo "hidden";?>>
-=======
-                                                <div class="dropdown mt-2" <?php if($item->status ==4 || $item->status == 5) echo "hidden";?>>
->>>>>>> aacf5a052d9fdce6484f6fc1b6aa886dff2466d9
                                                     <a href="" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
                                                         Status
                                                     </a>

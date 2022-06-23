@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+
 class ProductController extends Controller
 {
     /**
@@ -16,6 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        
         $products = Product::GetAll("shop");
         $c = new Category();
         $categories = $c->GetAll();
@@ -57,6 +59,7 @@ class ProductController extends Controller
             $product = array($product);
             return view('detail')->with('product',$product);
         }
+        
     }
 
     /**
@@ -92,4 +95,5 @@ class ProductController extends Controller
     {
         //
     }
+    
 }

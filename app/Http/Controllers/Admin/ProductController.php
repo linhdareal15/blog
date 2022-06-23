@@ -43,21 +43,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-<<<<<<< HEAD
-        $validator = $request->validate([
-            'code' => ['required', 'max:10'],
-            'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:1000'],
-            'price'=>['required','numeric','max:500000'],
-            'quantity' => ['required','numeric','max:1000'],
-            'image_url' => ['required'],
-            'sub_category_id' => ['required'],
-            'sale' => ['required','numeric','max:1'],
-            'status' => ['required','numeric']
-        ]);
-
-=======
->>>>>>> aacf5a052d9fdce6484f6fc1b6aa886dff2466d9
         $data = $request->all();
         $photo = $request->file('photo'); 
         $bool = Product::EditProduct($data['id'], $data['code'],$data['name'],$data['description'],
